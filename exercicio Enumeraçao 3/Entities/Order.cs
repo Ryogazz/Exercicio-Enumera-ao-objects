@@ -4,6 +4,7 @@ using System.Text;
 using exercicio_Enumeraçao_3.Enums;
 using exercicio_Enumeraçao_3.Entities;
 using System.Xml.Schema;
+using System.Globalization;
 
 namespace exercicio_Enumeraçao_3.Entities
 {
@@ -20,10 +21,11 @@ namespace exercicio_Enumeraçao_3.Entities
 
         }
 
-        public Order(DateTime moment, OrderStatus status)
+        public Order(DateTime moment, OrderStatus status, Client client)
         {
             Moment = DateTime.Now;
             Status = status;
+            Client = client;
         }
 
         public void AddItem(OrderItem item)
@@ -36,14 +38,31 @@ namespace exercicio_Enumeraçao_3.Entities
         }
 
 
-        public double Total;
-        public double GetTotal(OrderItem item)
+
+        public double Total()
         {
+            double sum = 0.0;
             foreach (OrderItem i in Itens)
             {
-                Total += i.SubTotal();
+                sum += i.SubTotal();
             }
-            return Total;
+            return sum;
+
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Order moment: " + Moment.ToString("dd/MM/yyyy HH:mm:ss"));
+            sb.AppendLine("Order status: " + Status);
+            sb.AppendLine("Client: " + Client);
+            sb.AppendLine("Order items:");
+            foreach (OrderItem item in Itens)
+            {
+                sb.AppendLine(item.ToString());
+            }
+            sb.AppendLine("Total price: $" + Total().ToString("F2", CultureInfo.InvariantCulture));
+            return sb.ToString();
         }
 
     }
