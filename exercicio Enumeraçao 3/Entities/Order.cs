@@ -35,16 +35,16 @@ namespace exercicio_Enumeraçao_3.Entities
             Itens.Remove(item);
         }
 
-        public double Total = 0;
 
-        foreach(OrderItem i in Itens)
+        public double Total;
+        public double GetTotal(OrderItem item)
+        {
+            foreach (OrderItem i in Itens)
             {
-                
+                Total += i.SubTotal();
             }
+            return Total;
+        }
 
-
-
-        
-        
     }
 }

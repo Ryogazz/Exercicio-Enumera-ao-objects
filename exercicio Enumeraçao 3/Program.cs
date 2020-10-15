@@ -24,9 +24,9 @@ namespace exercicio_Enumeraçao_3
             Console.Write("How many items to this order? ");
             int N = int.Parse(Console.ReadLine());
 
-            for(int i = 1; i < N; i++)
+            for(int i = 1; i <= N; i++)
             {
-                Console.WriteLine("Enter #" + N + " item data:");
+                Console.WriteLine("Enter #" + i + " item data:");
                 Console.Write("Product name: ");
                 name = Console.ReadLine();
                 Console.Write("Product price: ");
